@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09090d">
+<title>MR UNKNOWN AI</title>
+<style>
+:root{--bg:#09090d;--panel:#111118;--panel2:#171720;--line:#292936;--red:#ed263b;--text:#f4f3f6;--muted:#a4a2ad}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif}
+.app{min-height:100vh;display:grid;grid-template-columns:260px 1fr}
+aside{background:#0d0d13;border-right:1px solid var(--line);padding:20px 14px;display:flex;flex-direction:column;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;padding:6px 8px}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#ff4354,#74101d);display:grid;place-items:center;font-weight:900;box-shadow:0 0 25px #ed263b40}
+.brand b{letter-spacing:1.1px;font-size:14px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:2px}
+.new{border:1px solid #5a2029;background:#241116;color:white;border-radius:12px;padding:12px;text-align:left;cursor:pointer;font-weight:650}
+.new:hover{background:#35151d}.side-label{font-size:11px;color:#777582;text-transform:uppercase;letter-spacing:1.5px;padding:0 9px}
+.history{display:flex;flex-direction:column;gap:5px}.history button{background:none;border:0;color:#c8c6cf;text-align:left;padding:9px;border-radius:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.history button:hover{background:var(--panel2)}.side-foot{margin-top:auto;border-top:1px solid var(--line);padding:14px 8px;color:var(--muted);font-size:12px}
+main{display:flex;flex-direction:column;min-width:0;min-height:100vh}
+.top{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px}
+.top strong{font-size:13px;letter-spacing:1.4px}.status{font-size:12px;color:#aaa}.dot{display:inline-block;width:7px;height:7px;background:#4dd58a;border-radius:50%;margin-right:7px}
+.chat{width:min(850px,100%);margin:0 auto;padding:36px 24px 180px;flex:1}
+.welcome{text-align:center;margin:9vh auto 34px;max-width:610px}
+.avatar{width:76px;height:76px;margin:0 auto 20px;border-radius:24px;background:radial-gradient(circle at 35% 25%,#ff6673,#a31327 45%,#280b12 80%);display:grid;place-items:center;font-size:30px;font-weight:900;box-shadow:0 0 55px #e51f3735;border:1px solid #fa596b66}
+h1{font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:1px}h1 span{color:var(--red)}
+.welcome p{color:var(--muted);margin:0 auto 25px;max-width:520px}
+.suggestions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}
+.suggestions button{background:var(--panel);border:1px solid var(--line);color:#d9d7df;padding:10px 13px;border-radius:12px;cursor:pointer}
+.suggestions button:hover{border-color:#a62a39}
+.messages{display:flex;flex-direction:column;gap:20px}.msg{display:flex;gap:12px;align-items:flex-start}.msg.user{justify-content:flex-end}.bubble{max-width:min(720px,88%);padding:13px 16px;border-radius:16px;background:var(--panel2);white-space:pre-wrap;overflow-wrap:anywhere}.user .bubble{background:#35151d;border:1px solid #64212d}.mini{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#39131c;color:#ff6877;display:grid;place-items:center;font-weight:800;font-size:11px}
+.composer-wrap{position:fixed;bottom:0;left:260px;right:0;padding:24px;background:linear-gradient(transparent,#09090d 25%)}
+.composer{max-width:850px;margin:auto;background:#15151e;border:1px solid #393945;border-radius:18px;padding:10px;display:flex;gap:8px;align-items:flex-end;box-shadow:0 12px 45px #0008}
+textarea{flex:1;resize:none;max-height:150px;min-height:44px;background:transparent;border:0;outline:0;color:white;padding:11px;font:inherit}
+.iconbtn,.send{height:42px;min-width:42px;border:0;border-radius:12px;cursor:pointer;color:white;background:#292934}.send{background:var(--red);font-weight:800;padding:0 17px}.iconbtn:hover{background:#393945}
+.note{text-align:center;color:#777582;font-size:11px;margin:9px auto 0;max-width:850px}
+@media(max-width:700px){.app{grid-template-columns:1fr}aside{display:none}.composer-wrap{left:0;padding:15px}.top{padding:0 16px}.chat{padding:24px 15px 170px}.welcome{margin-top:8vh}.top .status{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><div class="logo">U</div><div><b>MR UNKNOWN AI</b><small>YOUR DIGITAL SIDEKICK</small></div></div>
+  <button class="new" id="newChat">＋ &nbsp; New chat</button>
+  <div class="side-label">Recent conversations</div>
+  <div class="history" id="history"></div>
+  <div class="side-foot">MR UNKNOWN AI · Prototype<br>Built for curious minds.</div>
+</aside>
+<main>
+  <header class="top"><strong>MR UNKNOWN AI</strong><div class="status"><span class="dot"></span>PERSONALITY ONLINE</div></header>
+  <section class="chat">
+    <div class="welcome" id="welcome">
+      <div class="avatar">U</div>
+      <h1>Well, well... <span>hello.</span></h1>
+      <p>I'm MR UNKNOWN AI. Ask me something interesting. I bring answers, ideas, and just enough sarcasm to keep things lively.</p>
+      <div class="suggestions">
+        <button data-prompt="Give me a creative idea for today.">Give me an idea</button>
+        <button data-prompt="Tell me a clever joke.">Make me laugh</button>
+        <button data-prompt="Help me write a rock song.">Write a song</button>
+      </div>
+    </div>
+    <div class="messages" id="messages"></div>
+  </section>
+</main>
+</div>
+<div class="composer-wrap">
+  <div class="composer">
+    <textarea id="prompt" rows="1" placeholder="Message MR UNKNOWN AI..."></textarea>
+    <button class="iconbtn" id="speak" title="Read latest answer aloud" aria-label="Read latest answer aloud">🔊</button>
+    <button class="send" id="send">Send</button>
+  </div>
+  <div class="note">Prototype mode: the chat interface works, but live AI answers need a secure AI connection.</div>
+</div>
+<script>
+const messagesEl=document.getElementById('messages'), promptEl=document.getElementById('prompt'), welcome=document.getElementById('welcome');
+let conversations=[], active=[];
+function drawHistory(){const h=document.getElementById('history');h.innerHTML='';conversations.forEach((c,i)=>{const b=document.createElement('button');b.textContent=c.title||'New conversation';b.onclick=()=>{active=c.messages;render()};h.appendChild(b)})}
+function render(){messagesEl.innerHTML='';welcome.style.display=active.length?'none':'block';active.forEach(m=>{const row=document.createElement('div');row.className='msg '+m.role; if(m.role==='assistant'){const badge=document.createElement('div');badge.className='mini';badge.textContent='U';row.appendChild(badge)}const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=m.text;row.appendChild(bubble);messagesEl.appendChild(row)});window.scrollTo(0,document.body.scrollHeight)}
+function reply(text){const t=text.toLowerCase();if(t.includes('joke'))return "I asked my computer for a little space. It gave me 500 gigabytes. Finally, a machine that understands boundaries.";if(t.includes('song')||t.includes('music'))return "Now we're talking. Give me a genre, a subject, and a mood. I'll help turn that idea into a song worth cranking up.";if(t.includes('idea'))return "Here's an idea: build a mystery-themed mini game where every clue unlocks a new room. Keep the clues clever, the atmosphere eerie, and the ending surprising.";return "That's an interesting one. I'm running in preview mode right now, so my full AI brain isn't connected yet. The chat screen is ready; the next step is connecting a real AI service securely. No fake genius act from me."; }
+function send(text){text=(text||promptEl.value).trim();if(!text)return;active.push({role:'user',text});active.push({role:'assistant',text:reply(text)});if(!conversations.includes(active))conversations.unshift({title:text.slice(0,32),messages:active});promptEl.value='';render();drawHistory()}
+document.getElementById('send').onclick=()=>send();document.getElementById('newChat').onclick=()=>{active=[];render()};promptEl.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>send(b.dataset.prompt));
+document.getElementById('speak').onclick=()=>{const last=[...active].reverse().find(m=>m.role==='assistant');if(!last||!('speechSynthesis'in window)){alert('Speech is not available in this browser yet.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(last.text);u.lang='en-US';const voices=speechSynthesis.getVoices();const male=voices.find(v=>/male|david|mark|guy/i.test(v.name));if(male)u.voice=male;speechSynthesis.speak(u)};
+render();drawHistory();
+</script>
+</body>
+</html>
